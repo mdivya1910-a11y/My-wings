@@ -3,213 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Red Butterfly</title>
+<title>My Wings</title>
+
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: hidden;
-  }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-  .quote {
-    color: rgba(255, 255, 255, 0.92);
-    font-family: 'Georgia', serif;
-    font-size: 18px;
-    font-style: italic;
-    letter-spacing: 0.05em;
-    text-align: center;
-    padding: 0 30px;
-    margin-bottom: 10px;
-    text-shadow: 0 0 12px rgba(255,255,255,0.2);
-  }
+body {
+  background: radial-gradient(circle at center, #2a0a0a 0%, #0d0d0d 70%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  overflow:hidden;
+  font-family: Georgia, serif;
+}
 
-  .butterfly {
-    animation: hover 3s ease-in-out infinite, pulse 2.5s ease-in-out infinite;
-  }
+/* Quote */
+.quote {
+  color: rgba(255,255,255,0.9);
+  font-size:18px;
+  font-style:italic;
+  letter-spacing:0.05em;
+  text-align:center;
+  margin-bottom:20px;
+  text-shadow:0 0 10px rgba(255,255,255,0.2);
+}
 
-  @keyframes hover {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-18px); }
-  }
+/* Butterfly motion */
+.butterfly {
+  animation: float 4s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+}
 
-  @keyframes pulse {
-    0%, 100% { filter: drop-shadow(0 0 8px rgba(180,0,0,0.3)) drop-shadow(0 0 18px rgba(180,0,0,0.15)); }
-    50% { filter: drop-shadow(0 0 18px rgba(220,0,0,0.7)) drop-shadow(0 0 35px rgba(180,0,0,0.35)); }
-  }
+@keyframes float {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(6px, -12px); }
+  50%  { transform: translate(-4px, -20px); }
+  75%  { transform: translate(5px, -10px); }
+  100% { transform: translate(0px, 0px); }
+}
 
-  .wings {
-    animation: flap 1.4s ease-in-out infinite;
-    transform-origin: 50% 50%;
-  }
+@keyframes glowPulse {
+  0%,100% { filter: drop-shadow(0 0 10px rgba(180,0,0,0.3)); }
+  50% { filter: drop-shadow(0 0 25px rgba(255,0,0,0.7)); }
+}
 
-  @keyframes flap {
-    0%, 100% { transform: scaleX(1); }
-    50% { transform: scaleX(0.65); }
-  }
+/* Wings */
+.wings {
+  animation: flap 1.2s ease-in-out infinite;
+  transform-origin:center;
+}
 
-  /* Music Button */
-  .music-btn {
-    position: fixed;
-    bottom: 24px;
-    left: 24px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background 0.3s, border-color 0.3s;
-    z-index: 10;
-  }
+@keyframes flap {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(35deg); }
+  100% { transform: rotateY(0deg); }
+}
 
-  .music-btn:hover {
-    background: rgba(180,0,0,0.25);
-    border-color: rgba(180,0,0,0.5);
-  }
+/* Music Button */
+.music-btn {
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,0.2);
+  font-size:18px;
+}
 
-  /* Built by */
-  .credit {
-    position: fixed;
-    bottom: 20px;
-    right: 24px;
-    text-align: right;
-    font-family: 'Georgia', serif;
-    line-height: 1.4;
-  }
+.music-btn:hover {
+  background:rgba(255,0,0,0.3);
+}
+
+/* Credit */
+.credit {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  text-align:right;
+  color:rgba(255,255,255,0.6);
+  font-size:14px;
+}
+
 </style>
 </head>
+
 <body>
 
-<!-- Music -->
 <audio id="bg-music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Quote -->
-<div class="quote">"She had wings — she just forgot she could fly… until now."</div>
+<div class="quote">
+  "She didn’t lose her wings… she just stopped believing in them."
+</div>
 
-<!-- Butterfly -->
-<svg class="butterfly" width="420" height="420" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="redRU" cx="80%" cy="20%" r="60%">
-      <stop offset="0%" stop-color="#dd0000"/>
-      <stop offset="40%" stop-color="#aa0000" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="redRL" cx="80%" cy="80%" r="55%">
-      <stop offset="0%" stop-color="#cc0000"/>
-      <stop offset="40%" stop-color="#990000" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="redLU" cx="20%" cy="20%" r="60%">
-      <stop offset="0%" stop-color="#dd0000"/>
-      <stop offset="40%" stop-color="#aa0000" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="redLL" cx="20%" cy="80%" r="55%">
-      <stop offset="0%" stop-color="#cc0000"/>
-      <stop offset="40%" stop-color="#990000" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="bodyglow" x="-80%" y="-20%" width="260%" height="140%">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
+<svg class="butterfly" width="420" height="420" viewBox="0 0 420 420">
 
-  <g class="wings">
-    <!-- RIGHT UPPER WING -->
-    <path d="M213 195 C220 165, 240 130, 265 108 C290 86, 320 78, 338 92 C360 110, 348 150, 322 175 C300 196, 258 205, 213 208 Z" fill="url(#redRU)" filter="url(#glow)"/>
-    <path d="M212 205 C220 165, 240 130, 265 108 C290 86, 320 78, 338 92 C360 110, 348 150, 322 175 C300 196, 258 205, 212 208" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.3" filter="url(#glow)"/>
-    <path d="M212 206 C235 178, 262 148, 290 125" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.9"/>
-    <path d="M212 206 C228 172, 250 142, 272 120" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width="0.85"/>
-    <path d="M212 206 C222 175, 238 150, 256 132" fill="none" stroke="rgba(255,255,255,0.23)" stroke-width="0.8"/>
-    <path d="M212 206 C218 178, 228 158, 242 142" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+<defs>
+  <radialGradient id="red" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="#ff0000"/>
+    <stop offset="100%" stop-color="transparent"/>
+  </radialGradient>
+</defs>
 
-    <!-- RIGHT LOWER WING -->
-    <path d="M213 218 C225 242, 245 272, 262 295 C279 318, 300 334, 314 328 C334 318, 332 290, 318 268 C304 246, 265 222, 213 215 Z" fill="url(#redRL)" filter="url(#glow)"/>
-    <path d="M213 218 C225 242, 245 272, 262 295 C279 318, 300 334, 314 328 C334 318, 332 290, 318 268 C304 246, 265 222, 213 216" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" filter="url(#glow)"/>
-    <path d="M213 218 C232 240, 252 264, 270 284" fill="none" stroke="rgba(255,255,255,0.30)" stroke-width="0.9"/>
-    <path d="M213 218 C228 238, 246 260, 260 278" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.85"/>
-    <path d="M213 218 C224 236, 238 255, 250 270" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
+<g class="wings">
+  <ellipse cx="140" cy="200" rx="100" ry="140" fill="url(#red)" opacity="0.5"/>
+  <ellipse cx="280" cy="200" rx="100" ry="140" fill="url(#red)" opacity="0.5"/>
+</g>
 
-    <!-- LEFT UPPER WING -->
-    <path d="M207 195 C200 165, 180 130, 155 108 C130 86, 100 78, 82 92 C60 110, 72 150, 98 175 C120 196, 162 205, 207 208 Z" fill="url(#redLU)" filter="url(#glow)"/>
-    <path d="M208 205 C200 165, 180 130, 155 108 C130 86, 100 78, 82 92 C60 110, 72 150, 98 175 C120 196, 162 205, 208 208" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.3" filter="url(#glow)"/>
-    <path d="M208 206 C185 178, 158 148, 130 125" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="0.9"/>
-    <path d="M208 206 C192 172, 170 142, 148 120" fill="none" stroke="rgba(255,255,255,0.27)" stroke-width="0.85"/>
-    <path d="M208 206 C198 175, 182 150, 164 132" fill="none" stroke="rgba(255,255,255,0.23)" stroke-width="0.8"/>
-    <path d="M208 206 C202 178, 192 158, 178 142" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+<!-- Body -->
+<line x1="210" y1="150" x2="210" y2="300" stroke="white" stroke-width="3"/>
 
-    <!-- LEFT LOWER WING -->
-    <path d="M207 218 C195 242, 175 272, 158 295 C141 318, 120 334, 106 328 C86 318, 88 290, 102 268 C116 246, 155 222, 207 215 Z" fill="url(#redLL)" filter="url(#glow)"/>
-    <path d="M207 218 C195 242, 175 272, 158 295 C141 318, 120 334, 106 328 C86 318, 88 290, 102 268 C116 246, 155 222, 207 216" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" filter="url(#glow)"/>
-    <path d="M207 218 C188 240, 168 264, 150 284" fill="none" stroke="rgba(255,255,255,0.30)" stroke-width="0.9"/>
-    <path d="M207 218 C192 238, 174 260, 160 278" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.85"/>
-    <path d="M207 218 C196 236, 182 255, 170 270" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.8"/>
-  </g>
-
-  <!-- BODY -->
-  <line x1="210" y1="170" x2="210" y2="310" stroke="rgba(255,255,255,0.1)" stroke-width="12" filter="url(#bodyglow)" stroke-linecap="round"/>
-  <path d="M210 172 C212 190, 213 210, 212 230 C211 250, 209 270, 208 295" fill="none" stroke="white" stroke-width="2.8" stroke-linecap="round" filter="url(#glow)"/>
-
-  <!-- Head -->
-  <circle cx="210" cy="168" r="7" fill="white" filter="url(#glow)"/>
-
-  <!-- Antennae -->
-  <path d="M210 163 C206 150, 192 138, 178 130" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.4" stroke-linecap="round"/>
-  <path d="M210 163 C214 150, 214 137, 210 128" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.3" stroke-linecap="round"/>
-  <circle cx="178" cy="130" r="3" fill="rgba(255,255,255,0.95)"/>
-  <circle cx="210" cy="128" r="3" fill="rgba(255,255,255,0.95)"/>
 </svg>
 
-<!-- Music Toggle Button -->
-<div class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Toggle Music">🔇</div>
+<div class="music-btn" onclick="toggleMusic()" id="btn">🔇</div>
 
-<!-- Built by -->
 <div class="credit">
-  <div style="color: rgba(200,200,200,0.7); font-size: 13px; font-style: italic; letter-spacing: 0.06em; font-family: Georgia, serif;">Built by</div>
-  <div style="color: rgba(210,40,40,0.9); font-size: 18px; font-style: italic; letter-spacing: 0.08em; font-family: Georgia, serif; text-shadow: 0 0 8px rgba(180,0,0,0.4);">M. Divya</div>
+  Built by<br><b>M. Divya</b>
 </div>
 
 <script>
-  const music = document.getElementById('bg-music');
-  const btn = document.getElementById('musicBtn');
-  let playing = false;
+const music = document.getElementById("bg-music");
+const btn = document.getElementById("btn");
+let playing = false;
 
-  document.body.addEventListener('click', function startMusic() {
-    if (!playing) {
-      music.play();
-      playing = true;
-      btn.textContent = '🎵';
-    }
-  });
-
-  function toggleMusic() {
-    if (playing) {
-      music.pause();
-      playing = false;
-      btn.textContent = '🔇';
-    } else {
-      music.play();
-      playing = true;
-      btn.textContent = '🎵';
-    }
+function toggleMusic() {
+  if(playing){
+    music.pause();
+    btn.textContent = "🔇";
+  } else {
+    music.play();
+    btn.textContent = "🎵";
   }
-
+  playing = !playing;
+}
 </script>
 
 </body>
