@@ -24,49 +24,50 @@ body {
   color: rgba(255,255,255,0.9);
   font-size:18px;
   font-style:italic;
-  letter-spacing:0.05em;
   text-align:center;
   margin-bottom:20px;
-  text-shadow:0 0 10px rgba(255,255,255,0.2);
+  text-shadow:0 0 12px rgba(255,255,255,0.25);
 }
 
-/* Butterfly motion */
+/* Butterfly floating */
 .butterfly {
-  animation: float 4s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite, glow 3s ease-in-out infinite;
 }
 
+/* Natural floating */
 @keyframes float {
   0%   { transform: translate(0px, 0px); }
-  25%  { transform: translate(6px, -12px); }
-  50%  { transform: translate(-4px, -20px); }
-  75%  { transform: translate(5px, -10px); }
+  25%  { transform: translate(6px, -10px); }
+  50%  { transform: translate(-4px, -18px); }
+  75%  { transform: translate(5px, -8px); }
   100% { transform: translate(0px, 0px); }
 }
 
-@keyframes glowPulse {
-  0%,100% { filter: drop-shadow(0 0 10px rgba(180,0,0,0.3)); }
+/* Glow pulse */
+@keyframes glow {
+  0%,100% { filter: drop-shadow(0 0 8px rgba(180,0,0,0.3)); }
   50% { filter: drop-shadow(0 0 25px rgba(255,0,0,0.7)); }
 }
 
-/* Wings */
+/* Wings motion (realistic, not squash) */
 .wings {
-  animation: flap 1.2s ease-in-out infinite;
-  transform-origin:center;
+  animation: flap 1.3s ease-in-out infinite;
+  transform-origin: center;
 }
 
 @keyframes flap {
-  0% { transform: rotateY(0deg); }
-  50% { transform: rotateY(35deg); }
-  100% { transform: rotateY(0deg); }
+  0%   { transform: rotate(-2deg); }
+  50%  { transform: rotate(2deg); }
+  100% { transform: rotate(-2deg); }
 }
 
-/* Music Button */
+/* Music button */
 .music-btn {
   position:fixed;
   bottom:20px;
   left:20px;
-  width:42px;
-  height:42px;
+  width:44px;
+  height:44px;
   border-radius:50%;
   background:rgba(255,255,255,0.08);
   display:flex;
@@ -75,6 +76,7 @@ body {
   cursor:pointer;
   border:1px solid rgba(255,255,255,0.2);
   font-size:18px;
+  transition:0.3s;
 }
 
 .music-btn:hover {
@@ -87,44 +89,74 @@ body {
   bottom:20px;
   right:20px;
   text-align:right;
-  color:rgba(255,255,255,0.6);
   font-size:14px;
+  color:rgba(255,255,255,0.6);
 }
-
 </style>
 </head>
 
 <body>
 
+<!-- Music -->
 <audio id="bg-music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Quote -->
 <div class="quote">
   "She didn’t lose her wings… she just stopped believing in them."
 </div>
 
+<!-- BUTTERFLY -->
 <svg class="butterfly" width="420" height="420" viewBox="0 0 420 420">
 
 <defs>
-  <radialGradient id="red" cx="50%" cy="50%" r="70%">
+  <radialGradient id="redRU" cx="80%" cy="20%" r="60%">
+    <stop offset="0%" stop-color="#ff0000"/>
+    <stop offset="100%" stop-color="transparent"/>
+  </radialGradient>
+
+  <radialGradient id="redRL" cx="80%" cy="80%" r="60%">
+    <stop offset="0%" stop-color="#ff0000"/>
+    <stop offset="100%" stop-color="transparent"/>
+  </radialGradient>
+
+  <radialGradient id="redLU" cx="20%" cy="20%" r="60%">
+    <stop offset="0%" stop-color="#ff0000"/>
+    <stop offset="100%" stop-color="transparent"/>
+  </radialGradient>
+
+  <radialGradient id="redLL" cx="20%" cy="80%" r="60%">
     <stop offset="0%" stop-color="#ff0000"/>
     <stop offset="100%" stop-color="transparent"/>
   </radialGradient>
 </defs>
 
 <g class="wings">
-  <ellipse cx="140" cy="200" rx="100" ry="140" fill="url(#red)" opacity="0.5"/>
-  <ellipse cx="280" cy="200" rx="100" ry="140" fill="url(#red)" opacity="0.5"/>
+
+<!-- RIGHT UPPER -->
+<path d="M213 195 C220 165, 240 130, 265 108 C290 86, 320 78, 338 92 C360 110, 348 150, 322 175 C300 196, 258 205, 213 208 Z" fill="url(#redRU)"/>
+
+<!-- RIGHT LOWER -->
+<path d="M213 218 C225 242, 245 272, 262 295 C279 318, 300 334, 314 328 C334 318, 332 290, 318 268 C304 246, 265 222, 213 215 Z" fill="url(#redRL)"/>
+
+<!-- LEFT UPPER -->
+<path d="M207 195 C200 165, 180 130, 155 108 C130 86, 100 78, 82 92 C60 110, 72 150, 98 175 C120 196, 162 205, 207 208 Z" fill="url(#redLU)"/>
+
+<!-- LEFT LOWER -->
+<path d="M207 218 C195 242, 175 272, 158 295 C141 318, 120 334, 106 328 C86 318, 88 290, 102 268 C116 246, 155 222, 207 215 Z" fill="url(#redLL)"/>
+
 </g>
 
-<!-- Body -->
-<line x1="210" y1="150" x2="210" y2="300" stroke="white" stroke-width="3"/>
+<!-- BODY -->
+<line x1="210" y1="170" x2="210" y2="310" stroke="white" stroke-width="3"/>
 
 </svg>
 
+<!-- Music Button -->
 <div class="music-btn" onclick="toggleMusic()" id="btn">🔇</div>
 
+<!-- Credit -->
 <div class="credit">
   Built by<br><b>M. Divya</b>
 </div>
